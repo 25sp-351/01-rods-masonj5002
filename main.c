@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    printf("welcome to rods.");
+    printf("welcome to rods.\n");
 
     printf("Supplied rod name: ");
 
