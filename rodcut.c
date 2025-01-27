@@ -4,7 +4,6 @@
 
 
 int main(int argc, char** argv){
-
   // Rod length exists
   if(argc != 2) {
     printf("USAGE: rod_length<int>");
@@ -21,24 +20,45 @@ int main(int argc, char** argv){
   printf("\nYou entered: %d", rod_length);
   printf("\n");
 
-
-  // user input string. we will use the same one and then parase
-  // into seperate length, value arrays
-  char userInput[400];
   int length[100];
   int value[100];
+ 
+  char user_input[25];
 
-  //int comma = ',';
-
-
-  // keeps track of # of cuts
   int cut_counter = 0;
-
-
   printf("Enter the list of piece prices \"length, value\":\n");
-  
-  //KEEP LOOPING UNITL control + D IS PRESSED
+  while(fgets(user_input, 400, stdin) != NULL){    //EOF is NULL
+    int comma_pos = 0;
+    for(int i = 0; i < 100; i++) {
+      int cursor = user_input[i];
+      if (cursor == 44) {
+        comma_pos = i;
+        break;
+      }
+    }
 
+    // Converts to parallel strings
+    char str_length[9];
+    strncpy(str_length, user_input, comma_pos);
+    str_length[comma_pos] = '\0';
+
+    char str_value[9];
+    strncpy(str_value, user_input+comma_pos+1, 5);
+    str_length[5] = '\0';
+
+    // Converts to int & appends arrays
+    length[cut_counter] = atoi(str_length);
+    value[cut_counter] = atoi(str_value);
+
+    //***DELETE ME
+    printf("Value in length array: %d", length[cut_counter]);
+    printf("\n");
+    printf("Value in value array: %d", value[cut_counter]);
+    printf("\n");
+
+    cut_counter++;
+  }
+  printf("end of loop");    //DELETEME
   // // loops until EOF is reached.
   // while(fgets(userInput, 100, stdin) == 1) {
   //   printf("%s\n", userInput);
