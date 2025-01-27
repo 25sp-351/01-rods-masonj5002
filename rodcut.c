@@ -6,7 +6,7 @@
 int main(int argc, char** argv){
   // Rod length exists
   if(argc != 2) {
-    printf("USAGE: rod_length<int>");
+    printf("USAGE: rod_length<int>\n");
     return 1;
   }
 
