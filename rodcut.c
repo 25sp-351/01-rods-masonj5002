@@ -16,10 +16,7 @@ int main(int argc, char** argv){
     printf("INVALID ROD LENGTH.");
     return 1;
   }
-  
-  printf("\nYou entered: %d", rod_length);
-  printf("\n");
-
+  int current_rod_length = rod_length;
   int length[100];
   int value[100];
  
@@ -46,6 +43,12 @@ int main(int argc, char** argv){
     strncpy(str_value, user_input+comma_pos+1, 5);
     str_length[5] = '\0';
 
+    // Check if length is too long
+    if (atoi(str_length) > current_rod_length) {
+      printf("The cut is too long for rod. Program will exit.\n");
+      return 1;
+    }
+
     // Converts to int & appends arrays
     length[cut_counter] = atoi(str_length);
     value[cut_counter] = atoi(str_value);
@@ -56,31 +59,8 @@ int main(int argc, char** argv){
     printf("Value in value array: %d", value[cut_counter]);
     printf("\n");
 
+    current_rod_length -= length[cut_counter];
     cut_counter++;
   }
-  printf("end of loop");    //DELETEME
-  // // loops until EOF is reached.
-  // while(fgets(userInput, 100, stdin) == 1) {
-  //   printf("%s\n", userInput);
-  //   printf("Enter the list of piece prices \"length, value\": ");
-  //   instruction_counter++;
-  // }
-
-  int remaining_rod_length = rod_length;
-  int total_value = 0;
-
-  //for(i=0; i < instruction_counter; i++) {   
-  // if (can_cut(remaining_rod_length, length[i])) {
-  //    remaining_rod_length = remaining_rod_length - length[i];
-  //    total_value = total_value + value[i];
-  //    print <n> @ <size> = <value>
-  // }
-  //}
-
-  printf("Value: %d\n", total_value);
-  printf("\n");
-  return 0;
+  printf("end of loop\n");    //DELETEME
 }
-
-//TODO
-int can_cut(int rem_rod_length, int cut_length) {}
