@@ -22,8 +22,7 @@ int main(int argc, char **argv) {
     char user_input[25];
 
     int cut_counter = 0;
-    printf(
-        "Enter the length of rod cuts and their prices \"length, value\":\n");
+    printf("Enter the length of rod cuts and their prices \"length, value\":\n");
     while (fgets(user_input, 400, stdin) != NULL) { // EOF is NULL
         int comma_pos = 0;
         for (int i = 0; i < 100; i++) {
