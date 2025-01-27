@@ -63,8 +63,15 @@ int main(int argc, char** argv){
     cut_counter++;
   }
 
-  printf("\nCut List:\n");
+  printf("\n\nCut List:\n");
   for (int i = 0; i < cut_counter; i++) {
     printf("1 @ %d = %d\n", length[i], value[i]);
   }
+
+  printf("\nRemainder: %d\n", current_rod_length);
+  int total_value = 0;
+  for (int i = 0; i < cut_counter; i++) {
+    total_value += value[i];
+  }
+  printf("Value: %d\n\n", total_value);
 }
