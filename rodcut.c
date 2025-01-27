@@ -23,7 +23,7 @@ int main(int argc, char** argv){
   char user_input[25];
 
   int cut_counter = 0;
-  printf("Enter the list of piece prices \"length, value\":\n");
+  printf("Enter the length of rod cuts and their prices \"length, value\":\n");
   while(fgets(user_input, 400, stdin) != NULL){    //EOF is NULL
     int comma_pos = 0;
     for(int i = 0; i < 100; i++) {
@@ -52,12 +52,6 @@ int main(int argc, char** argv){
     // Converts to int & appends arrays
     length[cut_counter] = atoi(str_length);
     value[cut_counter] = atoi(str_value);
-
-    //***DELETE ME
-    printf("Value in length array: %d", length[cut_counter]);
-    printf("\n");
-    printf("Value in value array: %d", value[cut_counter]);
-    printf("\n");
 
     current_rod_length -= length[cut_counter];
     cut_counter++;
