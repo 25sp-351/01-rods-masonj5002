@@ -62,5 +62,6 @@ int main(int argc, char** argv){
     current_rod_length -= length[cut_counter];
     cut_counter++;
   }
-  printf("end of loop\n");    //DELETEME
+
+  
 }
