@@ -63,5 +63,8 @@ int main(int argc, char** argv){
     cut_counter++;
   }
 
-  
+  printf("\nCut List:\n");
+  for (int i = 0; i < cut_counter; i++) {
+    printf("1 @ %d = %d\n", length[i], value[i]);
+  }
 }
