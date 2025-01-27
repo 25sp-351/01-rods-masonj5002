@@ -25,10 +25,10 @@ int main(int argc, char **argv) {
     printf("Enter the length of rod cuts and their prices \"length, value\":\n");
     while (fgets(user_input, 400, stdin) != NULL) { // EOF is NULL
         int comma_pos = 0;
-        for (int i = 0; i < 100; i++) {
-            int cursor = user_input[i];
+        for (int ix = 0; ix < 100; ix++) {
+            int cursor = user_input[ix];
             if (cursor == 44) {
-                comma_pos = i;
+                comma_pos = ix;
                 break;
             }
         }
@@ -57,12 +57,12 @@ int main(int argc, char **argv) {
     }
 
     printf("\n\nCut List:\n");
-    for (int i = 0; i < cut_counter; i++)
-        printf("1 @ %d = %d\n", length[i], value[i]);
+    for (int ix = 0; ix < cut_counter; ix++)
+        printf("1 @ %d = %d\n", length[ix], value[ix]);
 
     printf("\nRemainder: %d\n", current_rod_length);
     int total_value = 0;
-    for (int i = 0; i < cut_counter; i++)
-        total_value += value[i];
+    for (int ix = 0; ix < cut_counter; ix++)
+        total_value += value[ix];
     printf("Value: %d\n\n", total_value);
 }
