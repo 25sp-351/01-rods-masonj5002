@@ -3,10 +3,10 @@ all: rodcut
 CC = gcc
 CFLAGS = -Wall
 
-rodcut: rodcut.o piece_values.o
-	gcc -o rodcut $(CFLAGS) rodcut.o piece_values.o
+rodcut: rodcut.o
+	gcc -o rodcut $(CFLAGS) rodcut.o
 
-rodcut.o: rodcut.c piece_values.h
+rodcut.o: rodcut.c
 
 clean:
 	rm -f rodcut *.o
