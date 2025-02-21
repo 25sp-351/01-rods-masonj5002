@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
         int comma_pos = 0;
         for (int ix = 0; ix < 100; ix++) {
             int cursor = user_input[ix];
-            if (cursor == 44) {
+            if (cursor == ',') {
                 comma_pos = ix;
                 break;
             }
