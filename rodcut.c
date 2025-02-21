@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 
     // convert rod length into int
     int rod_length = atoi(argv[1]);
-    if (rod_length == 0) {
+    if (rod_length < 1) {
         printf("INVALID ROD LENGTH.");
         return 1;
     }
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
     char user_input[25];
 
     int cut_counter = 0;
-    printf("Enter the length of rod cuts and their prices \"length, value\":\n");
+    // User input
     while (fgets(user_input, 400, stdin) != NULL) { // EOF is NULL
         int comma_pos = 0;
         for (int ix = 0; ix < 100; ix++) {
