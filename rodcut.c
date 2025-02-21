@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
     for (int ix = 0; ix < cut_counter; ix++)
         printf("1 @ %d = %d\n", length[ix], value[ix]);
 
-    printf("\nRemainder: %d\n", current_rod_length);
+    printf("Remainder: %d\n", current_rod_length);
     int total_value = 0;
     for (int ix = 0; ix < cut_counter; ix++)
         total_value += value[ix];
