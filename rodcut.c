@@ -1,6 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+
+#define MAX_SIZE 200
+
+// TODO: ALLOW FUNCTION TO EXIT PROGRAM CLEANLY
+void userInput(int length[], int value[], int *rod_length, int *cut_list_size) {
+  int cut_length, cut_value = 0;
+
+  while (scanf("%d,%d", &cut_length, &cut_value) == 2) { // 2 is not NULL
+    if (*cut_list_size >= MAX_SIZE) {
+      printf("MAXIMUM INPUT SIZE EXCEEDED - PROGRAM WILL EXIT.\n");
+      break;
+    }
+
+    if (cut_length > *rod_length) {
+      printf("The cut is too long for this rod. Program will exit\n");
+      return;
+    }
+
+    length[*cut_list_size] = cut_length;
+    value[*cut_list_size] = cut_value;
+    (*cut_list_size)++;
+  }
+}
+
+int recursiveRodcut(int length[], int value[], int *rod_length,
+                    int *cut_list_size) {
+  printf("HELLO FROM recursiveRodcut\n");
+
+  // ARE WE DONE? (BASE CASE)
+  // check if remainder is less than the smallest cut size
+
+  // LEAST WE CAN DO
+  // choose the cut that has the highest dollar amount
+
+  // TRUST THAT SOMEONE ELSE CAN DO
+  // reduce the remainder and run it again
+
+  return 0;
+}
+
+// system output
 
 int main(int argc, char **argv) {
   // Rod length exists
@@ -15,54 +55,20 @@ int main(int argc, char **argv) {
     printf("INVALID ROD LENGTH.");
     return 1;
   }
-  int current_rod_length = rod_length;
-  int length[100];
-  int value[100];
+  printf("Rod length: %d\n", rod_length);
 
-  char user_input[25];
+  int cut_list_size = 0;
+  int length[MAX_SIZE];
+  int value[MAX_SIZE];
+  userInput(length, value, &rod_length, &cut_list_size);
 
-  int cut_counter = 0;
-  // User input
-  while (fgets(user_input, 400, stdin) != NULL) { // EOF is NULL
-    int comma_pos = 0;
-    for (int ix = 0; ix < 100; ix++) {
-      int cursor = user_input[ix];
-      if (cursor == ',') {
-        comma_pos = ix;
-        break;
-      }
-    }
-
-    // Converts to parallel strings
-    char str_length[9];
-    strncpy(str_length, user_input, comma_pos);
-    str_length[comma_pos] = '\0';
-
-    char str_value[9];
-    strncpy(str_value, user_input + comma_pos + 1, 5);
-    str_length[5] = '\0';
-
-    // Check if length is too long
-    if (atoi(str_length) > current_rod_length) {
-      printf("The cut is too long for rod. Program will exit.\n");
-      return 1;
-    }
-
-    // Converts to int & appends arrays
-    length[cut_counter] = atoi(str_length);
-    value[cut_counter] = atoi(str_value);
-
-    current_rod_length -= length[cut_counter];
-    cut_counter++;
+  // DEBUGGING OUTPUT
+  printf("\nYOU ENTERED:\n");
+  for (int i = 0; i < cut_list_size; i++) {
+    if (length[i] == 0 && value[i] == 0)
+      break;
+    printf("Length: %d, Value: %d\n", length[i], value[i]);
   }
 
-  printf("\n\nCut List:\n");
-  for (int ix = 0; ix < cut_counter; ix++)
-    printf("1 @ %d = %d\n", length[ix], value[ix]);
-
-  printf("Remainder: %d\n", current_rod_length);
-  int total_value = 0;
-  for (int ix = 0; ix < cut_counter; ix++)
-    total_value += value[ix];
-  printf("Value: %d\n\n", total_value);
+  return 0;
 }
