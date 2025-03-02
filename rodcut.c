@@ -100,7 +100,8 @@ int main(int argc, char **argv) {
     }
 
     printf("\nSTARTING RECURSIVE RODCUT...\n");
-    printf("Profit: %d\n", recursiveRodcut(length, value, &rod_length, &cut_list_size));
+    printf("Profit: %d\n",
+           recursiveRodcut(length, value, &rod_length, &cut_list_size));
 
     free(length);
     free(value);
