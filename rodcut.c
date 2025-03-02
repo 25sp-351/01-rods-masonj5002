@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX_SIZE 200
 
@@ -32,9 +33,12 @@ int shortestLength(int length[], int cut_list_size) {
     return shortest;
 }
 
+// RETURNS HIGHEST VALUE
 int recursiveRodcut(int length[], int value[], int *rod_length,
-                    int *cut_list_size) {
+                    int *cut_list_size, int *cuts, int *num_cuts) {
     printf("HELLO FROM recursiveRodcut\n");
+    printf("CUTLIST SIZE: %d\n", *cut_list_size);
+    printf("NUMBER OF CUTS: %d\n", *num_cuts);
 
     // BASE CASE
     if (*rod_length < shortestLength(length, *cut_list_size)) {
@@ -45,7 +49,8 @@ int recursiveRodcut(int length[], int value[], int *rod_length,
     int highest_value_for_length       = 0;
     int highest_value_for_length_index = -1;
 
-    for (int iw = 1; iw < *cut_list_size; iw++) {
+    // ITERATING THROUGH EACH VALUE AND CHOOSING THE HIGHEST ONE
+    for (int iw = 0; iw < *cut_list_size; iw++) {
         if (value[iw] > highest_value_for_length && length[iw] <= *rod_length) {
             highest_value_for_length       = value[iw];
             highest_value_for_length_index = iw;
@@ -57,12 +62,19 @@ int recursiveRodcut(int length[], int value[], int *rod_length,
         return 0;
     }
 
+    // making the cut
     *rod_length -= (length[highest_value_for_length_index]);
+    cuts[*num_cuts] = length[highest_value_for_length_index];
+    *num_cuts += 1;
 
     // Recursive call
-    int recursive_result =
-        recursiveRodcut(length, value, rod_length, cut_list_size);
+    int recursive_result = recursiveRodcut(length, value, rod_length,
+                                           cut_list_size, cuts, num_cuts);
     return (value[highest_value_for_length_index] + recursive_result);
+}
+
+const char *outputCuts(int length[], int value[], int *rod_length, int *cuts,
+                       int *num_cuts) {
 }
 
 int main(int argc, char **argv) {
@@ -100,10 +112,22 @@ int main(int argc, char **argv) {
     }
 
     printf("\nSTARTING RECURSIVE RODCUT...\n");
-    printf("Profit: %d\n",
-           recursiveRodcut(length, value, &rod_length, &cut_list_size));
+    int *cuts     = (int *)malloc(MAX_SIZE * sizeof(int));
+    int *num_cuts = (int *)malloc(sizeof(int));
+    *num_cuts     = 0;
+    printf("Profit: %d\n", recursiveRodcut(length, value, &rod_length,
+                                           &cut_list_size, cuts, num_cuts));
+
+    // DUBUGGING CUT LENGTHS
+    printf("\n");
+    for (int iv = 0; iv < *num_cuts; iv++)
+        printf("Cut #%d: %d\n", iv + 1, cuts[iv]);
+
+    // launch function output
 
     free(length);
     free(value);
+    free(cuts);
+    free(num_cuts);
     return 0;
 }
